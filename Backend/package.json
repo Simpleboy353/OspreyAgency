@@ -1,0 +1,14 @@
+{
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "electron": "^36.4.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
