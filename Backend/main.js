@@ -40,20 +40,18 @@ app.on('window-all-closed', () => {
 });
 
 ipcMain.handle('login', (event, { username, password }) => {
-    return new Promise((resolve, reject) => {
-        db.get(`SELECT * FROM admin WHERE username = ?`, [username], (err, row) => {
-            if (err) {
-                reject({ success: false, message: 'Database error' });
-            } else if (!row) {
-                resolve({ success: false, message: 'User not found' });
-            } else if (row.password === password) {
-                resolve({ success: true, message: 'Login successful', user: row });
-            } else {
-                resolve({ success: false, message: 'Invalid credentials' });
-            }
-        });
-    });
+  return new Promise((resolve) => {
+    if (username === 'admin' && password === 'admin123') {
+      // Successful admin login, you can add a user object to return if needed
+      resolve({ success: true, message: 'Login successful', user: { username: 'admin', role: 'admin' } });
+    } else if (username !== 'admin') {
+      resolve({ success: false, message: 'User not found' });
+    } else {
+      resolve({ success: false, message: 'Invalid credentials' });
+    }
+  });
 });
+
 
 
 ipcMain.handle('userLogin', (event, { email, password }) => {
